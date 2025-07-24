@@ -11,7 +11,6 @@ from typing import (
     TypeVar,
 )
 from dataclasses import dataclass
-from starlette.datastructures import Headers
 
 from pydantic import SecretStr
 
@@ -88,7 +87,7 @@ class ServerAuthenticationProvider(Component):
         )
 
     @abstractmethod
-    def authenticate_or_raise(self, headers: Headers) -> UserIdentity:
+    def authenticate_or_raise(self, headers: Dict[str, str]) -> UserIdentity:
         pass
 
     def ignore_operation(self, verb: str, path: str) -> bool:
@@ -165,6 +164,8 @@ class AuthzAction(str, Enum):
     GET_TENANT = "tenant:get_tenant"
     CREATE_DATABASE = "db:create_database"
     GET_DATABASE = "db:get_database"
+    DELETE_DATABASE = "db:delete_database"
+    LIST_DATABASES = "db:list_databases"
     LIST_COLLECTIONS = "db:list_collections"
     COUNT_COLLECTIONS = "db:count_collections"
     CREATE_COLLECTION = "db:create_collection"
