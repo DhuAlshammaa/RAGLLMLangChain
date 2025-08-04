@@ -1,0 +1,4 @@
+# Here we will have the files that we don't not want to share on GitHub
+venv/
+.env
+__Pycache__
