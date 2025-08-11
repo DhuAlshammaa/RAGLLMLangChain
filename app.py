@@ -1,8 +1,8 @@
 import sys
-if sys.platform != "win32":  # only on Linux/Mac
+if sys.platform != "win32":  # Linux/Mac (Streamlit Cloud)
     __import__('pysqlite3')
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
+    
 import streamlit as st
 import os
 import dotenv
