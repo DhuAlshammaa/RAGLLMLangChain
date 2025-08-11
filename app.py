@@ -1,5 +1,5 @@
 import sys
-if sys.platform != "win32":  # only on Linux/Mac
+if sys.platform != "win32":  # Linux/Mac (Streamlit Cloud)
     __import__('pysqlite3')
     sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
@@ -187,9 +187,9 @@ else:
                 else [source for source in st.session_state.vector_db.get()["metadatas"]]
             )
 
-
+#is simply grabbing the part after the slash (/) from whatever model string you stored in st.session_state.model.
 #Main chat app
-model_provider = st.session_state.model.split("/")[0] #is simply grabbing the part after the slash (/) from whatever model string you stored in st.session_state.model.
+model_provider = st.session_state.model.split("/")[0] 
 if model_provider =="openai":
     llm_stream = ChatOpenAI(
         api_key=openai_api_key,
@@ -198,12 +198,12 @@ if model_provider =="openai":
         streaming=True,
     )
 
-if model_provider =="anthropic":
-    llm_stream = ChatAnthropic(
-        model_name = st.session_state.model.split("/")[-1],
-        temperature=0.3,
-        streaming=True,
-    )
+# if model_provider =="anthropic":
+#     llm_stream = ChatAnthropic(
+#         model_name = st.session_state.model.split("/")[-1],
+#         temperature=0.3,
+#         streaming=True,
+#     )
 
 
 # Display previous messages from the session
